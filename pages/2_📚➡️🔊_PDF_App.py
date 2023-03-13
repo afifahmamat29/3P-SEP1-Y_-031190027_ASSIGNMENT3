@@ -35,7 +35,7 @@ hide_streamlit_style = """
                 """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
-st.title('PDF Application')
+st.title('PDF To Text App')
 
 lang_dict = {'English':'en','French':'fr','Malay':'ms','Mandarin':'zh-CN','Tamil':'ta' }
 lang_key= list(lang_dict.keys())
