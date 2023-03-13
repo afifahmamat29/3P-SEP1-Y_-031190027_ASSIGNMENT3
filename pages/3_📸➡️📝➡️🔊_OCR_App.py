@@ -40,7 +40,7 @@ st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 reader = easyocr.Reader(['en','ms','fr']) # this needs to run only once to load the model into memory
 
 
-st.title('OCR Application')
+st.title('General OCR Application')
 
 #for audio(gTTS)
 lang_dict = {'English':'en','French':'fr','Malay':'ms'}
