@@ -1,0 +1,5 @@
+streamlit==1.20.0
+pypdf==3.5.2
+pandas==1.4.3
+gTTS==2.3.1
+easyocr==1.6.2
