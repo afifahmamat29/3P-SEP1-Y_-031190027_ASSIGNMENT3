@@ -34,7 +34,7 @@ hide_streamlit_style = """
                 """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
-st.title('Text Application')
+st.title('Text To Speech')
 
 lang_dict = {'English':'en','French':'fr','Malay':'ms','Mandarin':'zh-CN','Tamil':'ta' }
 lang_key= list(lang_dict.keys())
