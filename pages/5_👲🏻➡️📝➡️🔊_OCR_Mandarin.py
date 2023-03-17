@@ -64,7 +64,7 @@ acc_option = st.selectbox('Accent',acc_key)
 uploaded_file = st.file_uploader("Upload your picture", type=['png','jpg', 'jpeg'])
 if uploaded_file is not None:
     st.image(uploaded_file, caption='Uploaded Image.', use_column_width=True)
-    result = reader.readtext(uploaded_file.getvalue())
+    result = st.session_state.reader5.readtext(uploaded_file.getvalue())
     txt = "\n".join([item[1] for item in result])
     st.text(txt)
     tts = gTTS(txt, lang=lang_dict[lang_option], tld=acc_dict[acc_option])
