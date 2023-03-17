@@ -1,6 +1,6 @@
 import streamlit as st
 from gtts import gTTS
-import easyocr
+import time
 import pandas as pd
 
 hide_streamlit_style = """
@@ -53,9 +53,12 @@ acc_option = st.selectbox('Accent',acc_key)
 uploaded_file = st.file_uploader("Upload your picture", type=['png','jpg', 'jpeg'])
 if uploaded_file is not None:
     st.image(uploaded_file, caption='Uploaded Image.', use_column_width=True)
+    start_time = time.time()
     result = st.session_state.reader3.readtext(uploaded_file.getvalue())
+    total_time = (time.time() - start_time)
     txt = "\n".join([item[1] for item in result])
     st.text(txt)
+    st.caption(f'The processing time took : {total_time} seconds')
     tts = gTTS(txt, lang=lang_dict[lang_option], tld=acc_dict[acc_option])
     tts.save('hello.mp3')
     st.audio('hello.mp3', format='audio/ogg')
