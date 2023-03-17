@@ -58,7 +58,7 @@ if uploaded_file is not None:
     total_time = (time.time() - start_time)
     txt = "\n".join([item[1] for item in result])
     st.text(txt)
-    st.caption(f'The processing time took : {total_time} seconds')
+    st.caption(f'The processing time took : {total_time:.3f} seconds')
     tts = gTTS(txt, lang=lang_dict[lang_option], tld=acc_dict[acc_option])
     tts.save('hello.mp3')
     st.audio('hello.mp3', format='audio/ogg')
