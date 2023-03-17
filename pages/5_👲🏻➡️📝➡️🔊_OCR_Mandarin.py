@@ -36,12 +36,6 @@ hide_streamlit_style = """
                 """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
-#for image reader(easyOCR)
-
-reader = easyocr.Reader(['en','ch_sim']) # this needs to run only once to load the model into memory
-
-
-
 st.title('OCR Application')
 
 #for audio(gTTS)
