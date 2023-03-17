@@ -36,10 +36,6 @@ hide_streamlit_style = """
                 """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
-#for image reader(easyOCR)
-reader = easyocr.Reader(['en','ms','fr']) # this needs to run only once to load the model into memory
-
-
 st.title('Bahasa OCR Application')
 
 #for audio(gTTS)
@@ -57,7 +53,7 @@ acc_option = st.selectbox('Accent',acc_key)
 uploaded_file = st.file_uploader("Upload your picture", type=['png','jpg', 'jpeg'])
 if uploaded_file is not None:
     st.image(uploaded_file, caption='Uploaded Image.', use_column_width=True)
-    result = reader.readtext(uploaded_file.getvalue())
+    result = st.session_state.reader3.readtext(uploaded_file.getvalue())
     txt = "\n".join([item[1] for item in result])
     st.text(txt)
     tts = gTTS(txt, lang=lang_dict[lang_option], tld=acc_dict[acc_option])
