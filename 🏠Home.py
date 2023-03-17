@@ -2,6 +2,7 @@ import streamlit as st
 from gtts import gTTS
 from pypdf import PdfReader
 import webbrowser
+import easyocr
 
 hide_streamlit_style = """
                 <style>
@@ -37,7 +38,15 @@ hide_streamlit_style = """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
 st.title('Text to Speech With OCR')
-import streamlit as st
+
+if 'reader3' not in st.session_state:
+    st.session_state.reader3 = easyocr.Reader(['en','ms','fr'])
+
+if 'reader5' not in st.session_state:
+    st.session_state.reader5 = easyocr.Reader(['en','ch_sim'])
+    
+if 'reader6' not in st.session_state:
+    st.session_state.reader6 = easyocr.Reader(['en','ta'])
 
 col1, col2, col3 = st.columns(3)
 
