@@ -2,6 +2,7 @@ import streamlit as st
 from gtts import gTTS
 import time
 import pandas as pd
+import easyocr
 
 hide_streamlit_style = """
                 <style>
@@ -36,6 +37,10 @@ hide_streamlit_style = """
                 """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
+if 'reader3' not in st.session_state:
+    st.session_state.reader3 = easyocr.Reader(['en','ms','fr'])
+
+
 st.title('Bahasa OCR Application')
 
 #for audio(gTTS)
@@ -58,9 +63,12 @@ if uploaded_file is not None:
     total_time = time.time() - start_time
     txt = "\n".join([item[1] for item in result])
     st.text(txt)
-    st.caption(f'The processing time took : {total_time:.3f} seconds')
+    st.caption(f'The processing of image to text took : {total_time:.3f} seconds')
+    start_time = time.time()
     tts = gTTS(txt, lang=lang_dict[lang_option], tld=acc_dict[acc_option])
     tts.save('hello.mp3')
     st.audio('hello.mp3', format='audio/ogg')
+    total_time = (time.time() - start_time)
+    st.caption(f'The processing of text to audio took : {total_time:.3f} seconds')
     with st.expander("See Accuracy"):
         st.dataframe(pd.DataFrame(result,columns=['Pixel','Text','Accuracy'])[['Text', 'Accuracy', 'Pixel']])
