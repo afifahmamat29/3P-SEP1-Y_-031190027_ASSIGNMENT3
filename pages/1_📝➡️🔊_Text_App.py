@@ -1,5 +1,6 @@
 import streamlit as st
 from gtts import gTTS
+import time
 
 hide_streamlit_style = """
                 <style>
@@ -56,8 +57,10 @@ txt = st.text_area('Text to analyze', '''
     ''')
 
 if st.button('Play'):
+    start_time = time.time()
     tts = gTTS(txt, lang=lang_dict[lang_option], tld=acc_dict[acc_option])
     tts.save('hello.mp3')
     st.audio('hello.mp3', format='audio/ogg')
+    total_time = (time.time() - start_time)
     st.write(txt)
-    
+    st.caption(f'The processing of text to audio took : {total_time:.3f} seconds')
