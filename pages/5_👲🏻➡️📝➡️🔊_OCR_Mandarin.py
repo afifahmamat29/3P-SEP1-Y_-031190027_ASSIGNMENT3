@@ -1,7 +1,8 @@
 import streamlit as st
 from gtts import gTTS
-import easyocr
+import time
 import pandas as pd
+import easyocr
 
 hide_streamlit_style = """
                 <style>
@@ -36,6 +37,9 @@ hide_streamlit_style = """
                 """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
+if 'reader5' not in st.session_state:
+    st.session_state.reader5 = easyocr.Reader(['en','ch_sim'])
+    
 st.title('OCR Application')
 
 #for audio(gTTS)
@@ -58,11 +62,17 @@ acc_option = st.selectbox('Accent',acc_key)
 uploaded_file = st.file_uploader("Upload your picture", type=['png','jpg', 'jpeg'])
 if uploaded_file is not None:
     st.image(uploaded_file, caption='Uploaded Image.', use_column_width=True)
+    start_time = time.time()
     result = st.session_state.reader5.readtext(uploaded_file.getvalue())
+    total_time = time.time() - start_time
     txt = "\n".join([item[1] for item in result])
     st.text(txt)
+    st.caption(f'The processing of image to text took : {total_time:.3f} seconds')
+    start_time = time.time()
     tts = gTTS(txt, lang=lang_dict[lang_option], tld=acc_dict[acc_option])
     tts.save('hello.mp3')
     st.audio('hello.mp3', format='audio/ogg')
+    total_time = (time.time() - start_time)
+    st.caption(f'The processing of text to audio took : {total_time:.3f} seconds')
     with st.expander("See Accuracy"):
         st.dataframe(pd.DataFrame(result,columns=['Pixel','Text','Accuracy'])[['Text', 'Accuracy', 'Pixel']])
