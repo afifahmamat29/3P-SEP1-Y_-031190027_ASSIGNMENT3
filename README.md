@@ -5,6 +5,10 @@ As I have already launched the web application on streamlit,
 you may access it by entering https://afifahmamat29-3p-sep1-y--031190027-assignment3-home-5yq178.streamlit.app/ in your web browser. 
 This link leads to the homepage of web-based text-to-speech with optical character recognition. 
 
+Demo video :
+Part 1: https://www.youtube.com/watch?v=2QH8FC0S1Yc
+Part 2 : https://www.youtube.com/watch?v=4dacYk8jmDQ
+
 ## Installation
 
 1. Download the zip file for this project
